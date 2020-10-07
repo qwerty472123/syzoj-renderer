@@ -1,1 +1,1 @@
-export { highlight } from './internal/highlight-renderer';
+module.exports = require('./internal/highlight-renderer').highlight;

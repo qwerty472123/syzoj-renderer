@@ -1,11 +1,13 @@
-import Pygments from 'pygments-promise';
-import EscapeHTML from 'escape-html';
-import ObjectHash from 'object-hash';
-import ObjectAssignDeep from 'object-assign-deep';
+const Pygments = require('pygments-promise');
+const EscapeHTML = require('escape-html');
+const ObjectHash = require('object-hash');
+const ObjectAssignDeep = require('object-assign-deep');
 
-import AsyncRenderer from './async-renderer';
+const AsyncRenderer = require('./async-renderer');
 
-export async function highlight(code, language, cache, options) {
+module.exports = {};
+
+module.exports.highlight = async function highlight(code, language, cache, options) {
   let cacheKey;
   if (cache) {
     cacheKey = ObjectHash({
@@ -67,7 +69,7 @@ export async function highlight(code, language, cache, options) {
   return result;
 }
 
-export default class HighlightRenderer extends AsyncRenderer {
+module.exports.HighlightRenderer = class HighlightRenderer extends AsyncRenderer {
   constructor(cache, callbackAddReplace, options) {
     super(cache, callbackAddReplace);
     this.options = options;
@@ -83,7 +85,7 @@ export default class HighlightRenderer extends AsyncRenderer {
 
   // markdown-it will wrap the highlighted result if it's not started with '<pre'.
   // Wrap the uuid with a <pre> tag to make sure markdown-it's result is valid HTML
-  // to prevent filter function from parse error.
+  // to prevent filter function = require(parse error.
   _generateUUID(uuidGenerator) {
     return '<pre>' + uuidGenerator() + '</pre>';
   }

@@ -1,6 +1,6 @@
-import { v4 as UUID } from 'uuid';
+const UUID = require('uuid').v4;
 
-export default class AsyncRenderer {
+module.exports = class AsyncRenderer {
   constructor(cache, callbackAddReplace) {
     this.cache = cache;
     this.callbackAddReplace = callbackAddReplace;

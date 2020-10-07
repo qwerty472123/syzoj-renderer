@@ -1,11 +1,11 @@
-import util from 'util';
-import path from 'path';
-import MathJaxNodePage from 'mathjax-node-page';
-import EscapeHTML from 'escape-html';
-import UUID from 'uuid';
-import RandomString from 'randomstring';
+const util = require('util');
+const path = require('path');
+const MathJaxNodePage = require('mathjax-node-page');
+const EscapeHTML = require('escape-html');
+const UUID = require('uuid');
+const RandomString = require('randomstring');
 
-import AsyncRenderer from './async-renderer';
+const AsyncRenderer = require('./async-renderer');
 
 // Generate a random macro name for MathJax's reset macro.
 const resetMacroName = 'resetMacro' + RandomString.generate({
@@ -24,7 +24,7 @@ function formatErrorMessage(message) {
 // to render asynchronously, but then I moved to render all maths within
 // a single call to MathJax, so now this class overrides doRender and handle
 // all tasks in a single function. And cache is NOT used.
-export default class MathRenderer extends AsyncRenderer {
+module.exports = class MathRenderer extends AsyncRenderer {
   constructor(cache, callbackAddReplace) {
     // Don't cache it since a page must be rendered in the same time.
     super(null, callbackAddReplace);

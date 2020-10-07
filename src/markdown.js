@@ -1,13 +1,13 @@
-import MarkdownIt from 'markdown-it';
-import MarkdownItMath from 'markdown-it-math-loose';
-import MarkdownItMergeCells from 'markdown-it-merge-cells';
-import ObjectHash from 'object-hash';
-import ObjectAssignDeep from 'object-assign-deep';
+const MarkdownIt = require('markdown-it');
+const MarkdownItMath = require('markdown-it-math-loose');
+const MarkdownItMergeCells = require('markdown-it-merge-cells');
+const ObjectHash = require('object-hash');
+const ObjectAssignDeep = require('object-assign-deep');
 
-import MathRenderer from './internal/math-renderer';
-import HighlightRenderer from './internal/highlight-renderer';
+const MathRenderer = require('./internal/math-renderer');
+const HighlightRenderer = require('./internal/highlight-renderer').HighlightRenderer;
 
-export default async function render(input, cache, callbackFilter, options) {
+module.exports = async function render(input, cache, callbackFilter, options) {
   // Check cache first.
   let cacheKey;
   if (cache) {

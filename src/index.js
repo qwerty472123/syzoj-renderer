@@ -1,2 +1,4 @@
-export { highlight } from './highlight';
-export { default as markdown } from './markdown';
+module.exports = {
+    highlight: require('./highlight'),
+    markdown: require('./markdown')
+};
