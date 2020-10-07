@@ -2,7 +2,7 @@ const util = require('util');
 const path = require('path');
 const MathJaxNodePage = require('mathjax-node-page');
 const EscapeHTML = require('escape-html');
-const UUID = require('uuid');
+const UUID = require('uuid').v4;
 const RandomString = require('randomstring');
 
 const AsyncRenderer = require('./async-renderer');
