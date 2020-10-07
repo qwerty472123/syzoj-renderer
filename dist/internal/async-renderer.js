@@ -5,11 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _uuid = require("uuid");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -49,10 +45,10 @@ var AsyncRenderer = /*#__PURE__*/function () {
   }, {
     key: "doRender",
     value: function () {
-      var _doRender = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2(callbackCheckFiltered) {
+      var _doRender = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(callbackCheckFiltered) {
         var _this = this;
 
-        return _regenerator["default"].wrap(function _callee2$(_context2) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
@@ -60,8 +56,8 @@ var AsyncRenderer = /*#__PURE__*/function () {
                 return Promise.all(this.tasks.filter(function (task) {
                   return !callbackCheckFiltered(task.uuid);
                 }).map( /*#__PURE__*/function () {
-                  var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(task) {
-                    return _regenerator["default"].wrap(function _callee$(_context) {
+                  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(task) {
+                    return regeneratorRuntime.wrap(function _callee$(_context) {
                       while (1) {
                         switch (_context.prev = _context.next) {
                           case 0:

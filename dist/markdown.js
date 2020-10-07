@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = render;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _markdownIt = _interopRequireDefault(require("markdown-it"));
 
 var _markdownItMathLoose = _interopRequireDefault(require("markdown-it-math-loose"));
@@ -32,9 +30,9 @@ function render(_x, _x2, _x3, _x4) {
 }
 
 function _render() {
-  _render = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(input, cache, callbackFilter, options) {
+  _render = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(input, cache, callbackFilter, options) {
     var cacheKey, cachedResult, uuidReplaces, mathRenderer, highlightRenderer, renderer, htmlResult, replacedHtmlResult, uuid;
-    return _regenerator["default"].wrap(function _callee$(_context) {
+    return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:

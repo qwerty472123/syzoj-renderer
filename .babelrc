@@ -7,7 +7,7 @@
       "@babel/plugin-transform-runtime",
       {
         "corejs": false,
-        "regenerator": true,
+        "regenerator": false,
         "helpers": false
       }
     ]

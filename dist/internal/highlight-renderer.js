@@ -6,8 +6,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.highlight = highlight;
 exports["default"] = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _pygmentsPromise = _interopRequireDefault(require("pygments-promise"));
 
 var _escapeHtml = _interopRequireDefault(require("escape-html"));
@@ -51,9 +49,9 @@ function highlight(_x, _x2, _x3, _x4) {
 }
 
 function _highlight() {
-  _highlight = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2(code, language, cache, options) {
+  _highlight = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(code, language, cache, options) {
     var cacheKey, cachedResult, result, wrapper;
-    return _regenerator["default"].wrap(function _callee2$(_context2) {
+    return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -205,8 +203,8 @@ var HighlightRenderer = /*#__PURE__*/function (_AsyncRenderer) {
   }, {
     key: "_doRender",
     value: function () {
-      var _doRender2 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(task) {
-        return _regenerator["default"].wrap(function _callee$(_context) {
+      var _doRender2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(task) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:

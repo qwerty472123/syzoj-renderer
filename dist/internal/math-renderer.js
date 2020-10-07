@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports["default"] = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _util = _interopRequireDefault(require("util"));
 
 var _path = _interopRequireDefault(require("path"));
@@ -101,10 +99,10 @@ var MathRenderer = /*#__PURE__*/function (_AsyncRenderer) {
   }, {
     key: "doRender",
     value: function () {
-      var _doRender = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(callbackCheckFiltered) {
+      var _doRender = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(callbackCheckFiltered) {
         var jsdom, document, tasks, tasksAndReset, _iterator, _step, task, uuid, math, scriptTag, divTag, _iterator2, _step2, _task, result, errorMessage;
 
-        return _regenerator["default"].wrap(function _callee$(_context) {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
