@@ -7,7 +7,7 @@ const AsyncRenderer = require('./async-renderer');
 
 module.exports = {};
 
-module.exports.highlight = async function highlight(code, language, cache, options) {
+async function highlight(code, language, cache, options) {
   let cacheKey;
   if (cache) {
     cacheKey = ObjectHash({
@@ -69,7 +69,9 @@ module.exports.highlight = async function highlight(code, language, cache, optio
   return result;
 }
 
-module.exports.HighlightRenderer = class HighlightRenderer extends AsyncRenderer {
+module.exports.highlight = highlight;
+
+class HighlightRenderer extends AsyncRenderer {
   constructor(cache, callbackAddReplace, options) {
     super(cache, callbackAddReplace);
     this.options = options;
@@ -99,3 +101,5 @@ module.exports.HighlightRenderer = class HighlightRenderer extends AsyncRenderer
     return await highlight(task.code, task.language, this.cache, this.options, this.highlighter);
   }
 }
+
+module.exports.HighlightRenderer = HighlightRenderer;
