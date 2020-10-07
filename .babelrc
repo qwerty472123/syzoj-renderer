@@ -1,12 +1,14 @@
 {
-  "presets": ["env"],
+  "presets": [
+    "@babel/preset-env"
+  ],
   "plugins": [
     [
-      "transform-runtime",
+      "@babel/plugin-transform-runtime",
       {
+        "corejs": false,
         "regenerator": true,
-        "helpers": false,
-        "polyfill": false
+        "helpers": false
       }
     ]
   ]

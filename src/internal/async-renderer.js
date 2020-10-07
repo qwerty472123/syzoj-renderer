@@ -1,4 +1,4 @@
-import UUID from 'uuid';
+import { v4 as UUID } from 'uuid';
 
 export default class AsyncRenderer {
   constructor(cache, callbackAddReplace) {

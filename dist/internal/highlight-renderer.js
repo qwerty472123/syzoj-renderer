@@ -1,31 +1,68 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.highlight = undefined;
+exports.highlight = highlight;
+exports["default"] = void 0;
 
-var _regenerator = require('babel-runtime/regenerator');
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
+var _pygmentsPromise = _interopRequireDefault(require("pygments-promise"));
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _escapeHtml = _interopRequireDefault(require("escape-html"));
 
-var highlight = exports.highlight = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(code, language, cache, options) {
+var _objectHash = _interopRequireDefault(require("object-hash"));
+
+var _objectAssignDeep = _interopRequireDefault(require("object-assign-deep"));
+
+var _asyncRenderer = _interopRequireDefault(require("./async-renderer"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function highlight(_x, _x2, _x3, _x4) {
+  return _highlight.apply(this, arguments);
+}
+
+function _highlight() {
+  _highlight = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee2(code, language, cache, options) {
     var cacheKey, cachedResult, result, wrapper;
-    return _regenerator2.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
-            cacheKey = void 0;
-
             if (!cache) {
-              _context.next = 8;
+              _context2.next = 7;
               break;
             }
 
-            cacheKey = (0, _objectHash2.default)({
+            cacheKey = (0, _objectHash["default"])({
               type: "Highlight",
               task: {
                 code: code,
@@ -33,23 +70,21 @@ var highlight = exports.highlight = function () {
                 options: options
               }
             });
-
-            _context.next = 5;
+            _context2.next = 4;
             return cache.get(cacheKey);
 
-          case 5:
-            cachedResult = _context.sent;
+          case 4:
+            cachedResult = _context2.sent;
 
             if (!cachedResult) {
-              _context.next = 8;
+              _context2.next = 7;
               break;
             }
 
-            return _context.abrupt('return', cachedResult);
+            return _context2.abrupt("return", cachedResult);
 
-          case 8:
-
-            options = (0, _objectAssignDeep2.default)({
+          case 7:
+            options = (0, _objectAssignDeep["default"])({
               pygments: {
                 lexer: language,
                 format: 'html',
@@ -61,175 +96,136 @@ var highlight = exports.highlight = function () {
               wrapper: ['<pre><code>', '</code></pre>'],
               expandTab: null
             }, options);
-
-            result = void 0;
-            _context.prev = 10;
+            _context2.prev = 8;
 
             if (!(typeof options.highlighter === 'function')) {
-              _context.next = 17;
+              _context2.next = 15;
               break;
             }
 
-            _context.next = 14;
+            _context2.next = 12;
             return options.highlighter(code, language);
 
-          case 14:
-            result = _context.sent;
-            _context.next = 20;
+          case 12:
+            result = _context2.sent;
+            _context2.next = 18;
             break;
 
-          case 17:
-            _context.next = 19;
-            return _pygmentsPromise2.default.pygmentize(code, (0, _objectAssignDeep2.default)({
+          case 15:
+            _context2.next = 17;
+            return _pygmentsPromise["default"].pygmentize(code, (0, _objectAssignDeep["default"])({
               lexer: language
             }, options.pygments));
 
-          case 19:
-            result = _context.sent;
+          case 17:
+            result = _context2.sent;
 
-          case 20:
-            _context.next = 24;
+          case 18:
+            _context2.next = 22;
             break;
 
+          case 20:
+            _context2.prev = 20;
+            _context2.t0 = _context2["catch"](8);
+
           case 22:
-            _context.prev = 22;
-            _context.t0 = _context['catch'](10);
-
-          case 24:
-
             // May error rendering.
             if (typeof result !== 'string' || result.length === 0) {
-              result = (0, _escapeHtml2.default)(code);
-            }
+              result = (0, _escapeHtml["default"])(code);
+            } // Add wrapper.
 
-            // Add wrapper.
+
             wrapper = Array.isArray(options.wrapper) ? options.wrapper : [];
-
             if (typeof wrapper[0] === 'string') result = wrapper[0] + result;
-            if (typeof wrapper[1] === 'string') result = result + wrapper[1];
+            if (typeof wrapper[1] === 'string') result = result + wrapper[1]; // Expand tab.
 
-            // Expand tab.
             if (typeof options.expandTab === 'number' && options.expandTab > 0) {
               result = result.split('\t').join(' '.repeat(options.expandTab));
             }
 
             if (!cache) {
-              _context.next = 32;
+              _context2.next = 30;
               break;
             }
 
-            _context.next = 32;
+            _context2.next = 30;
             return cache.set(cacheKey, result);
 
-          case 32:
-            return _context.abrupt('return', result);
+          case 30:
+            return _context2.abrupt("return", result);
 
-          case 33:
-          case 'end':
-            return _context.stop();
+          case 31:
+          case "end":
+            return _context2.stop();
         }
       }
-    }, _callee, this, [[10, 22]]);
+    }, _callee2, null, [[8, 20]]);
   }));
+  return _highlight.apply(this, arguments);
+}
 
-  return function highlight(_x, _x2, _x3, _x4) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-var _pygmentsPromise = require('pygments-promise');
-
-var _pygmentsPromise2 = _interopRequireDefault(_pygmentsPromise);
-
-var _escapeHtml = require('escape-html');
-
-var _escapeHtml2 = _interopRequireDefault(_escapeHtml);
-
-var _objectHash = require('object-hash');
-
-var _objectHash2 = _interopRequireDefault(_objectHash);
-
-var _objectAssignDeep = require('object-assign-deep');
-
-var _objectAssignDeep2 = _interopRequireDefault(_objectAssignDeep);
-
-var _asyncRenderer = require('./async-renderer');
-
-var _asyncRenderer2 = _interopRequireDefault(_asyncRenderer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-var HighlightRenderer = function (_AsyncRenderer) {
+var HighlightRenderer = /*#__PURE__*/function (_AsyncRenderer) {
   _inherits(HighlightRenderer, _AsyncRenderer);
 
+  var _super = _createSuper(HighlightRenderer);
+
   function HighlightRenderer(cache, callbackAddReplace, options) {
+    var _this;
+
     _classCallCheck(this, HighlightRenderer);
 
-    var _this = _possibleConstructorReturn(this, (HighlightRenderer.__proto__ || Object.getPrototypeOf(HighlightRenderer)).call(this, cache, callbackAddReplace));
-
+    _this = _super.call(this, cache, callbackAddReplace);
     _this.options = options;
     return _this;
   }
 
   _createClass(HighlightRenderer, [{
-    key: 'addRenderTask',
+    key: "addRenderTask",
     value: function addRenderTask(code, language) {
       return this._addRenderTask({
         code: code,
         language: language,
         options: this.options
       });
-    }
-
-    // markdown-it will wrap the highlighted result if it's not started with '<pre'.
+    } // markdown-it will wrap the highlighted result if it's not started with '<pre'.
     // Wrap the uuid with a <pre> tag to make sure markdown-it's result is valid HTML
     // to prevent filter function from parse error.
 
   }, {
-    key: '_generateUUID',
+    key: "_generateUUID",
     value: function _generateUUID(uuidGenerator) {
       return '<pre>' + uuidGenerator() + '</pre>';
-    }
-
-    // Don't cache if language is plain -- it only need to be escaped, not highlighted.
+    } // Don't cache if language is plain -- it only need to be escaped, not highlighted.
 
   }, {
-    key: '_shouldCache',
+    key: "_shouldCache",
     value: function _shouldCache(task) {
       return task.language !== 'plain';
     }
   }, {
-    key: '_doRender',
+    key: "_doRender",
     value: function () {
-      var _ref2 = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee2(task) {
-        return _regenerator2.default.wrap(function _callee2$(_context2) {
+      var _doRender2 = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(task) {
+        return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                _context2.next = 2;
+                _context.next = 2;
                 return highlight(task.code, task.language, this.cache, this.options, this.highlighter);
 
               case 2:
-                return _context2.abrupt('return', _context2.sent);
+                return _context.abrupt("return", _context.sent);
 
               case 3:
-              case 'end':
-                return _context2.stop();
+              case "end":
+                return _context.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee, this);
       }));
 
       function _doRender(_x5) {
-        return _ref2.apply(this, arguments);
+        return _doRender2.apply(this, arguments);
       }
 
       return _doRender;
@@ -237,6 +233,6 @@ var HighlightRenderer = function (_AsyncRenderer) {
   }]);
 
   return HighlightRenderer;
-}(_asyncRenderer2.default);
+}(_asyncRenderer["default"]);
 
-exports.default = HighlightRenderer;
+exports["default"] = HighlightRenderer;

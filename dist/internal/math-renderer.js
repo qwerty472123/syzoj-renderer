@@ -1,83 +1,97 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 
-var _regenerator = require('babel-runtime/regenerator');
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
+var _util = _interopRequireDefault(require("util"));
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _path = _interopRequireDefault(require("path"));
 
-var _util = require('util');
+var _mathjaxNodePage = _interopRequireDefault(require("mathjax-node-page"));
 
-var _util2 = _interopRequireDefault(_util);
+var _escapeHtml = _interopRequireDefault(require("escape-html"));
 
-var _path = require('path');
+var _uuid = _interopRequireDefault(require("uuid"));
 
-var _path2 = _interopRequireDefault(_path);
+var _randomstring = _interopRequireDefault(require("randomstring"));
 
-var _mathjaxNodePage = require('mathjax-node-page');
+var _asyncRenderer = _interopRequireDefault(require("./async-renderer"));
 
-var _mathjaxNodePage2 = _interopRequireDefault(_mathjaxNodePage);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _escapeHtml = require('escape-html');
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-var _escapeHtml2 = _interopRequireDefault(_escapeHtml);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-var _uuid = require('uuid');
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
-var _uuid2 = _interopRequireDefault(_uuid);
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-var _randomstring = require('randomstring');
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-var _randomstring2 = _interopRequireDefault(_randomstring);
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
 
-var _asyncRenderer = require('./async-renderer');
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-var _asyncRenderer2 = _interopRequireDefault(_asyncRenderer);
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 // Generate a random macro name for MathJax's reset macro.
-var resetMacroName = 'resetMacro' + _randomstring2.default.generate({
+var resetMacroName = 'resetMacro' + _randomstring["default"].generate({
   length: 16,
   charset: 'alphabetic'
 });
 
 function formatErrorMessage(message) {
-  var htmlContext = (0, _escapeHtml2.default)(message.trim('\n')).split('\n').join('<br>');
+  var htmlContext = (0, _escapeHtml["default"])(message.trim('\n')).split('\n').join('<br>');
   return '<span class="math-rendering-error-message">' + htmlContext + '</span>';
-}
-
-// This class is previously intented to call KaTeX and MathJax in _doRender
+} // This class is previously intented to call KaTeX and MathJax in _doRender
 // to render asynchronously, but then I moved to render all maths within
 // a single call to MathJax, so now this class overrides doRender and handle
 // all tasks in a single function. And cache is NOT used.
 
-var MathRenderer = function (_AsyncRenderer) {
+
+var MathRenderer = /*#__PURE__*/function (_AsyncRenderer) {
   _inherits(MathRenderer, _AsyncRenderer);
+
+  var _super = _createSuper(MathRenderer);
 
   function MathRenderer(cache, callbackAddReplace) {
     _classCallCheck(this, MathRenderer);
 
     // Don't cache it since a page must be rendered in the same time.
-    return _possibleConstructorReturn(this, (MathRenderer.__proto__ || Object.getPrototypeOf(MathRenderer)).call(this, null, callbackAddReplace));
+    return _super.call(this, null, callbackAddReplace);
   }
 
   _createClass(MathRenderer, [{
-    key: 'addRenderTask',
+    key: "addRenderTask",
     value: function addRenderTask(texCode, displayMode) {
       return this._addRenderTask({
         texCode: texCode,
@@ -85,84 +99,49 @@ var MathRenderer = function (_AsyncRenderer) {
       });
     }
   }, {
-    key: 'doRender',
+    key: "doRender",
     value: function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(callbackCheckFiltered) {
-        var jsdom, document, tasks, tasksAndReset, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, task, uuid, math, scriptTag, divTag, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _task, result, errorMessage;
+      var _doRender = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(callbackCheckFiltered) {
+        var jsdom, document, tasks, tasksAndReset, _iterator, _step, task, uuid, math, scriptTag, divTag, _iterator2, _step2, _task, result, errorMessage;
 
-        return _regenerator2.default.wrap(function _callee$(_context) {
+        return _regenerator["default"].wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                jsdom = new _mathjaxNodePage2.default.JSDOM(), document = jsdom.window.document;
+                jsdom = new _mathjaxNodePage["default"].JSDOM(), document = jsdom.window.document;
                 tasks = this.tasks.filter(function (task) {
                   return !callbackCheckFiltered(task.uuid);
                 }), tasksAndReset = [{
-                  uuid: (0, _uuid2.default)(),
+                  uuid: (0, _uuid["default"])(),
                   task: {
                     texCode: '\\' + resetMacroName,
                     displayMode: false
                   }
                 }].concat(_toConsumableArray(tasks));
-                _iteratorNormalCompletion = true;
-                _didIteratorError = false;
-                _iteratorError = undefined;
-                _context.prev = 5;
+                _iterator = _createForOfIteratorHelper(tasksAndReset);
 
-                for (_iterator = tasksAndReset[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                  task = _step.value;
-                  uuid = task.uuid, math = task.task;
-                  scriptTag = document.createElement('script');
-
-                  scriptTag.type = 'math/tex';
-                  if (math.displayMode) scriptTag.type += '; mode=display';
-                  scriptTag.text = math.texCode;
-
-                  divTag = document.createElement('div');
-
-                  divTag.id = uuid;
-                  divTag.appendChild(scriptTag);
-
-                  document.body.appendChild(divTag);
+                try {
+                  for (_iterator.s(); !(_step = _iterator.n()).done;) {
+                    task = _step.value;
+                    uuid = task.uuid, math = task.task;
+                    scriptTag = document.createElement('script');
+                    scriptTag.type = 'math/tex';
+                    if (math.displayMode) scriptTag.type += '; mode=display';
+                    scriptTag.text = math.texCode;
+                    divTag = document.createElement('div');
+                    divTag.id = uuid;
+                    divTag.appendChild(scriptTag);
+                    document.body.appendChild(divTag);
+                  }
+                } catch (err) {
+                  _iterator.e(err);
+                } finally {
+                  _iterator.f();
                 }
 
-                _context.next = 13;
-                break;
-
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context['catch'](5);
-                _didIteratorError = true;
-                _iteratorError = _context.t0;
-
-              case 13:
-                _context.prev = 13;
-                _context.prev = 14;
-
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                  _iterator.return();
-                }
-
-              case 16:
-                _context.prev = 16;
-
-                if (!_didIteratorError) {
-                  _context.next = 19;
-                  break;
-                }
-
-                throw _iteratorError;
-
-              case 19:
-                return _context.finish(16);
-
-              case 20:
-                return _context.finish(13);
-
-              case 21:
-                _context.next = 23;
+                _context.next = 6;
                 return new Promise(function (resolve, reject) {
-                  _mathjaxNodePage2.default.mjpage(jsdom, {
+                  _mathjaxNodePage["default"].mjpage(jsdom, {
                     output: 'svg',
                     cssInline: false,
                     errorHandler: function errorHandler(id, wrapperNode, sourceFormula, sourceFormat, errors) {
@@ -170,7 +149,7 @@ var MathRenderer = function (_AsyncRenderer) {
                     },
                     extensions: '[syzoj-renderer-mathjax]/reset.js,TeX/begingroup.js,TeX/newcommand.js,Safe.js',
                     paths: {
-                      'syzoj-renderer-mathjax': _path2.default.join(__dirname, 'mathjax/')
+                      'syzoj-renderer-mathjax': _path["default"].join(__dirname, 'mathjax/')
                     },
                     MathJax: {
                       Safe: {
@@ -185,71 +164,40 @@ var MathRenderer = function (_AsyncRenderer) {
                   }, {}, resolve);
                 });
 
-              case 23:
-                _iteratorNormalCompletion2 = true;
-                _didIteratorError2 = false;
-                _iteratorError2 = undefined;
-                _context.prev = 26;
+              case 6:
+                _iterator2 = _createForOfIteratorHelper(tasks);
 
+                try {
+                  for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                    _task = _step2.value;
+                    result = null;
 
-                for (_iterator2 = tasks[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                  _task = _step2.value;
-                  result = null;
+                    try {
+                      result = document.getElementById(_task.uuid).innerHTML;
+                    } catch (e) {
+                      errorMessage = "Failed to render ".concat(_task.task.displayMode ? 'display' : 'inline', " math: ") + _util["default"].inspect(_task.task.texCode) + '\n' + e.toString();
+                      result = formatErrorMessage(errorMessage);
+                    }
 
-                  try {
-                    result = document.getElementById(_task.uuid).innerHTML;
-                  } catch (e) {
-                    errorMessage = 'Failed to render ' + (_task.task.displayMode ? 'display' : 'inline') + ' math: ' + _util2.default.inspect(_task.task.texCode) + '\n' + e.toString();
-
-                    result = formatErrorMessage(errorMessage);
+                    if (_task.task.displayMode) result = "<p style=\"text-align: center; \">".concat(result, "</p>");
+                    this.callbackAddReplace(_task.uuid, result);
                   }
-
-                  if (_task.task.displayMode) result = '<p style="text-align: center; ">' + result + '</p>';
-                  this.callbackAddReplace(_task.uuid, result);
-                }
-                _context.next = 34;
-                break;
-
-              case 30:
-                _context.prev = 30;
-                _context.t1 = _context['catch'](26);
-                _didIteratorError2 = true;
-                _iteratorError2 = _context.t1;
-
-              case 34:
-                _context.prev = 34;
-                _context.prev = 35;
-
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                  _iterator2.return();
+                } catch (err) {
+                  _iterator2.e(err);
+                } finally {
+                  _iterator2.f();
                 }
 
-              case 37:
-                _context.prev = 37;
-
-                if (!_didIteratorError2) {
-                  _context.next = 40;
-                  break;
-                }
-
-                throw _iteratorError2;
-
-              case 40:
-                return _context.finish(37);
-
-              case 41:
-                return _context.finish(34);
-
-              case 42:
-              case 'end':
+              case 8:
+              case "end":
                 return _context.stop();
             }
           }
-        }, _callee, this, [[5, 9, 13, 21], [14,, 16, 20], [26, 30, 34, 42], [35,, 37, 41]]);
+        }, _callee, this);
       }));
 
       function doRender(_x) {
-        return _ref.apply(this, arguments);
+        return _doRender.apply(this, arguments);
       }
 
       return doRender;
@@ -257,6 +205,6 @@ var MathRenderer = function (_AsyncRenderer) {
   }]);
 
   return MathRenderer;
-}(_asyncRenderer2.default);
+}(_asyncRenderer["default"]);
 
-exports.default = MathRenderer;
+exports["default"] = MathRenderer;

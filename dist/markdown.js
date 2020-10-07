@@ -1,98 +1,83 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = render;
 
-var _regenerator = require('babel-runtime/regenerator');
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
-var _regenerator2 = _interopRequireDefault(_regenerator);
+var _markdownIt = _interopRequireDefault(require("markdown-it"));
 
-var _markdownIt = require('markdown-it');
+var _markdownItMathLoose = _interopRequireDefault(require("markdown-it-math-loose"));
 
-var _markdownIt2 = _interopRequireDefault(_markdownIt);
+var _markdownItMergeCells = _interopRequireDefault(require("markdown-it-merge-cells"));
 
-var _markdownItMathLoose = require('markdown-it-math-loose');
+var _objectHash = _interopRequireDefault(require("object-hash"));
 
-var _markdownItMathLoose2 = _interopRequireDefault(_markdownItMathLoose);
+var _objectAssignDeep = _interopRequireDefault(require("object-assign-deep"));
 
-var _markdownItMergeCells = require('markdown-it-merge-cells');
+var _mathRenderer = _interopRequireDefault(require("./internal/math-renderer"));
 
-var _markdownItMergeCells2 = _interopRequireDefault(_markdownItMergeCells);
+var _highlightRenderer = _interopRequireDefault(require("./internal/highlight-renderer"));
 
-var _objectHash = require('object-hash');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-var _objectHash2 = _interopRequireDefault(_objectHash);
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
-var _objectAssignDeep = require('object-assign-deep');
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var _objectAssignDeep2 = _interopRequireDefault(_objectAssignDeep);
+function render(_x, _x2, _x3, _x4) {
+  return _render.apply(this, arguments);
+}
 
-var _mathRenderer = require('./internal/math-renderer');
-
-var _mathRenderer2 = _interopRequireDefault(_mathRenderer);
-
-var _highlightRenderer = require('./internal/highlight-renderer');
-
-var _highlightRenderer2 = _interopRequireDefault(_highlightRenderer);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
-
-exports.default = function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regenerator2.default.mark(function _callee(input, cache, callbackFilter, options) {
+function _render() {
+  _render = _asyncToGenerator( /*#__PURE__*/_regenerator["default"].mark(function _callee(input, cache, callbackFilter, options) {
     var cacheKey, cachedResult, uuidReplaces, mathRenderer, highlightRenderer, renderer, htmlResult, replacedHtmlResult, uuid;
-    return _regenerator2.default.wrap(function _callee$(_context) {
+    return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            // Check cache first.
-            cacheKey = void 0;
-
             if (!cache) {
-              _context.next = 8;
+              _context.next = 7;
               break;
             }
 
-            cacheKey = (0, _objectHash2.default)({
+            cacheKey = (0, _objectHash["default"])({
               type: "Markdown",
               task: input,
               options: options
             });
-
-            _context.next = 5;
+            _context.next = 4;
             return cache.get(cacheKey);
 
-          case 5:
+          case 4:
             cachedResult = _context.sent;
 
             if (!cachedResult) {
-              _context.next = 8;
+              _context.next = 7;
               break;
             }
 
-            return _context.abrupt('return', cachedResult);
+            return _context.abrupt("return", cachedResult);
 
-          case 8:
-
+          case 7:
             // Merge options with default values and normalize non-object input for options.
             options = Object.assign({
               markdownItMergeCells: true
-            }, options);
-
-            // Maths and highlights are rendered asynchronously, so a UUID placeholder is
+            }, options); // Maths and highlights are rendered asynchronously, so a UUID placeholder is
             // returned to markdown-it during markdown rendering process. After markdown
             // and these finish rendering, replace the placeholder with rendered content
             // in markdown rendering result.
+
             uuidReplaces = {};
-            mathRenderer = new _mathRenderer2.default(cache, function (uuid, result) {
+            mathRenderer = new _mathRenderer["default"](cache, function (uuid, result) {
               uuidReplaces[uuid] = result;
             });
-            highlightRenderer = new _highlightRenderer2.default(cache, function (uuid, result) {
+            highlightRenderer = new _highlightRenderer["default"](cache, function (uuid, result) {
               uuidReplaces[uuid] = result;
             }, options.highlight);
-            renderer = new _markdownIt2.default((0, _objectAssignDeep2.default)({
+            renderer = new _markdownIt["default"]((0, _objectAssignDeep["default"])({
               html: true,
               breaks: false,
               linkify: true,
@@ -101,9 +86,7 @@ exports.default = function () {
                 return highlightRenderer.addRenderTask(code, language);
               }
             }, options.markdownIt));
-
-
-            renderer.use(_markdownItMathLoose2.default, (0, _objectAssignDeep2.default)({
+            renderer.use(_markdownItMathLoose["default"], (0, _objectAssignDeep["default"])({
               inlineOpen: '$',
               inlineClose: '$',
               blockOpen: '$$',
@@ -114,11 +97,10 @@ exports.default = function () {
               blockRenderer: function blockRenderer(str) {
                 return mathRenderer.addRenderTask(str, true);
               }
-            }, options.markdownItMath));
+            }, options.markdownItMath)); // Inject merge table cell support.
 
-            // Inject merge table cell support.
             if (options.markdownItMergeCells) {
-              renderer.use(_markdownItMergeCells2.default);
+              renderer.use(_markdownItMergeCells["default"]);
             }
 
             htmlResult = renderer.render(input);
@@ -126,53 +108,46 @@ exports.default = function () {
             if (callbackFilter) {
               // Useful for XSS filtering.
               htmlResult = callbackFilter(htmlResult);
-            }
+            } // Do math and highlight rendering.
 
-            // Do math and highlight rendering.
-            _context.next = 19;
+
+            _context.next = 18;
             return mathRenderer.doRender(function (uuid) {
               return htmlResult.indexOf(uuid) === -1;
             });
 
-          case 19:
-            _context.next = 21;
+          case 18:
+            _context.next = 20;
             return highlightRenderer.doRender(function (uuid) {
               return htmlResult.indexOf(uuid) === -1;
             });
 
-          case 21:
-
+          case 20:
             // Replace placeholders back.
             replacedHtmlResult = htmlResult;
 
             for (uuid in uuidReplaces) {
               replacedHtmlResult = replacedHtmlResult.replace(uuid, uuidReplaces[uuid]);
-            }
+            } // Set cache.
 
-            // Set cache.
 
             if (!cache) {
-              _context.next = 26;
+              _context.next = 25;
               break;
             }
 
-            _context.next = 26;
+            _context.next = 25;
             return cache.set(cacheKey, replacedHtmlResult);
 
-          case 26:
-            return _context.abrupt('return', replacedHtmlResult);
+          case 25:
+            return _context.abrupt("return", replacedHtmlResult);
 
-          case 27:
-          case 'end':
+          case 26:
+          case "end":
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee);
   }));
-
-  function render(_x, _x2, _x3, _x4) {
-    return _ref.apply(this, arguments);
-  }
-
-  return render;
-}();
+  return _render.apply(this, arguments);
+}
