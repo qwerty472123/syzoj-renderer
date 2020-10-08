@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@4qwerty7/mathjax-node-page@^3.2.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@4qwerty7/mathjax-node-page/-/mathjax-node-page-3.2.0.tgz#c744ea52273a772b6a1b54d0400dc1ed9cc8a401"
+  integrity sha512-nmzbJGSyHtYf2SAuHT0fTaa+LMQmi86z5/l8YWN+jFMEkwJJL3Fs7GJtUqkvrN23ygHMnIkQh5DTrxylBpxyGA==
+  dependencies:
+    mathjax-node "^2.0.0"
+    yargs "^13.0.0"
+
 abab@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -531,13 +539,6 @@ markdown-it@^8.4.2:
     linkify-it "^2.0.0"
     mdurl "^1.0.1"
     uc.micro "^1.0.5"
-
-mathjax-node-page@pkra/mathjax-node-page.git:
-  version "3.2.0"
-  resolved "https://codeload.github.com/pkra/mathjax-node-page/tar.gz/0b19eda91d0ced7fb75e0de35a860401be3600d3"
-  dependencies:
-    mathjax-node "^2.0.0"
-    yargs "^13.0.0"
 
 mathjax-node@^2.0.0:
   version "2.1.1"

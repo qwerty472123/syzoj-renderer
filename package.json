@@ -1,6 +1,6 @@
 {
   "name": "@4qwerty7/syzoj-renderer",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "SYZOJ's renderer for markdown, math and highlight",
   "scripts": {
   },
@@ -13,7 +13,7 @@
     "markdown-it": "^8.4.2",
     "markdown-it-math-loose": "^4.1.1",
     "markdown-it-merge-cells": "^1.0.0",
-    "mathjax-node-page": "pkra/mathjax-node-page.git",
+    "@4qwerty7/mathjax-node-page": "^3.2.0",
     "object-assign-deep": "^0.4.0",
     "object-hash": "^2.0.3",
     "pygments-promise": "^0.0.1",
