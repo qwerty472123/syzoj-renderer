@@ -3,7 +3,9 @@ const path = require('path');
 const MathJaxNodePage = require('mathjax-node-page');
 const EscapeHTML = require('escape-html');
 const UUID = require('uuid').v4;
+const katex = require('katex');
 const RandomString = require('randomstring');
+const ObjectHash = require('object-hash');
 
 const AsyncRenderer = require('./async-renderer');
 
@@ -20,14 +22,24 @@ function formatErrorMessage(message) {
         + '</span>';
 }
 
-// This class is previously intented to call KaTeX and MathJax in _doRender
-// to render asynchronously, but then I moved to render all maths within
-// a single call to MathJax, so now this class overrides doRender and handle
-// all tasks in a single function. And cache is NOT used.
+Array.prototype.filterAsync = async function(callback) {
+  let bools = await Promise.all(this.map(callback));
+  let res = [];
+  for (let i = 0; i < this.length; i++) if (bools[i]) res.push(this[i]);
+  return res;
+};
+Promise.prototype.filterAsync = async function(callback) {
+  let result = await this;
+  if (result.filterAsync) return result.filterAsync(callback);
+  throw new Error('No filter async');
+};
+
+// This class is intented to call KaTeX and MathJax in _doRender
+// to render asynchronously, so now this class overrides doRender and handle
+// all tasks in a single function.
 module.exports = class MathRenderer extends AsyncRenderer {
   constructor(cache, callbackAddReplace) {
-    // Don't cache it since a page must be rendered in the same time.
-    super(null, callbackAddReplace);
+    super(cache, callbackAddReplace);
   }
 
   addRenderTask(texCode, displayMode) {
@@ -40,7 +52,31 @@ module.exports = class MathRenderer extends AsyncRenderer {
   async doRender(callbackCheckFiltered) {
     const jsdom = new MathJaxNodePage.JSDOM(), document = jsdom.window.document;
 
-    const tasks = this.tasks.filter(task => !callbackCheckFiltered(task.uuid)),
+    const tasks = await this.tasks.filter(task => !callbackCheckFiltered(task.uuid))
+    .filterAsync(async task => {
+      task.hash = ObjectHash({
+        type: "TeX",
+        task: task.task
+      });
+      const result = await this.cache.get(task.hash);
+      if (result) {
+        this.callbackAddReplace(task.uuid, result);
+        return false;
+      }
+      return true;
+    })
+    .filterAsync(async task => {
+// add back katex
+      try {
+        let res = katex.renderToString(task.task.texCode, { displayMode: task.task.displayMode });
+        res = '<span style="zoom: 1.01; ">' + res + '</span>';
+        await this.cache.set(task.hash, res);
+        this.callbackAddReplace(task.uuid, res);
+        return false;
+      } catch (e) {
+        return true;
+      }
+    }),
           // Add a reset macro to the beginning of the document, to let MathJax reset
           // previous user-defined macros first.
           tasksAndReset = [{
@@ -101,6 +137,7 @@ module.exports = class MathRenderer extends AsyncRenderer {
       }
 
       if (task.task.displayMode) result = `<p style="text-align: center; ">${result}</p>`
+      await this.cache.set(task.hash, result);
       this.callbackAddReplace(task.uuid, result);
     }
   }
