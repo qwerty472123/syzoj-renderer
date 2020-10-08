@@ -1,6 +1,6 @@
 const util = require('util');
 const path = require('path');
-const MathJaxNodePage = require('mathjax-node-page');
+const MathJaxNodePage = require('@4qwerty7/mathjax-node-page');
 const EscapeHTML = require('escape-html');
 const UUID = require('uuid').v4;
 const katex = require('katex');
