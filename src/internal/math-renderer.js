@@ -54,14 +54,16 @@ module.exports = class MathRenderer extends AsyncRenderer {
 
     const tasks = await this.tasks.filter(task => !callbackCheckFiltered(task.uuid))
     .filterAsync(async task => {
-      task.hash = ObjectHash({
-        type: "TeX",
-        task: task.task
-      });
-      const result = await this.cache.get(task.hash);
-      if (result) {
-        this.callbackAddReplace(task.uuid, result);
-        return false;
+      if (this.cache) {
+        task.hash = ObjectHash({
+          type: "TeX",
+          task: task.task
+        });
+        const result = await this.cache.get(task.hash);
+        if (result) {
+          this.callbackAddReplace(task.uuid, result);
+          return false;
+        }
       }
       return true;
     })
@@ -70,7 +72,9 @@ module.exports = class MathRenderer extends AsyncRenderer {
       try {
         let res = katex.renderToString(task.task.texCode, { displayMode: task.task.displayMode });
         res = '<span style="zoom: 1.01; ">' + res + '</span>';
-        await this.cache.set(task.hash, res);
+        if (this.cache) {
+          await this.cache.set(task.hash, res);
+        }
         this.callbackAddReplace(task.uuid, res);
         return false;
       } catch (e) {
@@ -137,7 +141,9 @@ module.exports = class MathRenderer extends AsyncRenderer {
       }
 
       if (task.task.displayMode) result = `<p style="text-align: center; ">${result}</p>`
-      await this.cache.set(task.hash, result);
+      if (this.cache) {
+        await this.cache.set(task.hash, result);
+      }
       this.callbackAddReplace(task.uuid, result);
     }
   }

@@ -1,6 +1,6 @@
 {
   "name": "@4qwerty7/syzoj-renderer",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "SYZOJ's renderer for markdown, math and highlight",
   "scripts": {
   },
