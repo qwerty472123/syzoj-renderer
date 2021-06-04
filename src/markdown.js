@@ -1,6 +1,8 @@
 const MarkdownIt = require('markdown-it');
 const MarkdownItMath = require('markdown-it-math-loose');
 const MarkdownItMergeCells = require('markdown-it-merge-cells');
+const MarkdownItMentions = require('markdown-it-mentions');
+const MarkdownItTaskLists = require('@hackmd/markdown-it-task-lists');
 const ObjectHash = require('object-hash');
 const ObjectAssignDeep = require('object-assign-deep');
 
@@ -23,7 +25,9 @@ module.exports = async function render(input, cache, callbackFilter, options) {
 
   // Merge options with default values and normalize non-object input for options.
   options = Object.assign({
-    markdownItMergeCells: true
+    markdownItMergeCells: true,
+    markdownItTaskLists: true,
+    markdownItMentions: null
   }, options);
 
   // Maths and highlights are rendered asynchronously, so a UUID placeholder is
@@ -60,6 +64,18 @@ module.exports = async function render(input, cache, callbackFilter, options) {
   // Inject merge table cell support.
   if (options.markdownItMergeCells) {
     renderer.use(MarkdownItMergeCells);
+  }
+
+  if (options.markdownItMentions) {
+    renderer.use(MarkdownItMentions, {
+      parseURL: options.markdownItMentions
+    });
+  }
+
+  if (options.markdownItTaskLists) {
+    renderer.use(MarkdownItTaskLists, {
+      enabled: true
+    });
   }
   
   let htmlResult = renderer.render(input);

@@ -9,10 +9,12 @@
   "license": "AGPL-3.0",
   "dependencies": {
     "@4qwerty7/mathjax-node-page": "^3.2.0",
+    "@hackmd/markdown-it-task-lists": "^2.1.1",
     "escape-html": "^1.0.3",
     "katex": "^0.13.11",
     "markdown-it": "^12.0.6",
     "markdown-it-math-loose": "^4.1.1",
+    "markdown-it-mentions": "^1.0.0",
     "markdown-it-merge-cells": "^1.0.1",
     "object-assign-deep": "^0.4.0",
     "object-hash": "^2.2.0",

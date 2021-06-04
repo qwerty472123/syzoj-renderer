@@ -10,6 +10,11 @@
     mathjax-node "^2.0.0"
     yargs "^13.0.0"
 
+"@hackmd/markdown-it-task-lists@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@hackmd/markdown-it-task-lists/-/markdown-it-task-lists-2.1.1.tgz#8001dac48ff3b4fca81c5dddd3a3b127a2842aad"
+  integrity sha512-SOE60IE31RnGqnfmzl2uumuG63I1b+3kTA5U9BcYqmJ46cl17sx9iq4S2wHAffcbAqxkFhciNDWg2O9m1vNKsQ==
+
 abab@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -520,12 +525,24 @@ markdown-it-math-loose@^4.1.1:
   optionalDependencies:
     ascii2mathml "^0.6.2"
 
+markdown-it-mentions@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-mentions/-/markdown-it-mentions-1.0.0.tgz#2dc6a06d0604bfbf57ac22efb3558f338098990a"
+  integrity sha512-zZnkEWHfnIXCwzgv9WJh0Wo6iuwLJaApfOMQfKEqjYM5A98XXEChPRqI7jvZAdzPGfCfaBFv0GUQqUYw4DeSjg==
+  dependencies:
+    markdown-it-regexp "^0.4.0"
+
 markdown-it-merge-cells@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/markdown-it-merge-cells/-/markdown-it-merge-cells-1.0.1.tgz#ad375a09fa709213c19a354e537e560789ae2be8"
   integrity sha512-4I6wBy8OPgPRSYAw7VC3SEgIcuM7HiFvTi1AW9bbPYRoXoAsr6inyjX723gyDUUj9dQT7ICNWtxrom9ULOW46A==
   dependencies:
     babel-runtime "^6.26.0"
+
+markdown-it-regexp@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/markdown-it-regexp/-/markdown-it-regexp-0.4.0.tgz#d64d713eecec55ce4cfdeb321750ecc099e2c2dc"
+  integrity sha1-1k1xPuzsVc5M/esyF1DswJniwtw=
 
 markdown-it@^12.0.6:
   version "12.0.6"
